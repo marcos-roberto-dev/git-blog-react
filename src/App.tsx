@@ -2,7 +2,8 @@ import { styled } from 'styled-components'
 import Background from './assets/background-header.svg'
 import Logo from './assets/github-blog.svg'
 import { CardProfile } from './components/CardProfile'
-import { LayoutAdjustment } from './styles/LayoutAdjusment'
+import { ContainerLayout, LayoutAdjustment } from './styles/LayoutAdjusment'
+import { PublicationForm } from './components/PublicationForm'
 const HeaderContainer = styled.header`
   width: 1440px;
   margin: 0 auto;
@@ -22,12 +23,6 @@ const LogoHeader = styled.img`
   z-index: 1;
 `
 
-const ContainerLayout = styled.div`
-  max-width: 864px;
-  width: 100%;
-  margin: 0 auto;
-`
-
 function App() {
   return (
     <>
@@ -39,6 +34,7 @@ function App() {
         <LayoutAdjustment>
           <CardProfile />
         </LayoutAdjustment>
+        <PublicationForm />
       </ContainerLayout>
     </>
   )
