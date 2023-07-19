@@ -1,16 +1,17 @@
 import { styled } from 'styled-components'
 import Background from './assets/background-header.svg'
 import Logo from './assets/github-blog.svg'
-import { CardProfile } from './components/CardProfile'
 import { ContainerLayout, LayoutAdjustment } from './styles/LayoutAdjusment'
 import { PublicationForm } from './components/PublicationForm'
+import { ProfileCard } from './components/ProfileCard'
+import { PublicationCard } from './components/PublicationCard'
+
 const HeaderContainer = styled.header`
-  width: 1440px;
   margin: 0 auto;
 `
 
 const BackgroundHeader = styled.img`
-  z-index: 1;
+  width: 100%;
 `
 
 const LogoHeader = styled.img`
@@ -23,6 +24,13 @@ const LogoHeader = styled.img`
   z-index: 1;
 `
 
+const PublicationsContainer = styled.main`
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+`
+
 function App() {
   return (
     <>
@@ -32,9 +40,18 @@ function App() {
       </HeaderContainer>
       <ContainerLayout>
         <LayoutAdjustment>
-          <CardProfile />
+          <ProfileCard />
         </LayoutAdjustment>
         <PublicationForm />
+
+        <PublicationsContainer>
+          <PublicationCard />
+          <PublicationCard />
+          <PublicationCard />
+          <PublicationCard />
+          <PublicationCard />
+          <PublicationCard />
+        </PublicationsContainer>
       </ContainerLayout>
     </>
   )

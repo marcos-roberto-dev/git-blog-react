@@ -1,13 +1,13 @@
-import { CardProfileContainer } from './styles'
+import { ProfileCardContainer } from './styles'
 import {
   FaUserGroup,
   FaArrowUpRightFromSquare,
   FaGithub,
 } from 'react-icons/fa6'
 
-export function CardProfile() {
+export function ProfileCard() {
   return (
-    <CardProfileContainer>
+    <ProfileCardContainer>
       <div>
         <img
           src="https://avatars.githubusercontent.com/u/55327245?v=4"
@@ -43,6 +43,6 @@ export function CardProfile() {
           </nav>
         </div>
       </div>
-    </CardProfileContainer>
+    </ProfileCardContainer>
   )
 }
