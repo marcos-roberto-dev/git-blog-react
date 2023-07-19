@@ -16,7 +16,7 @@ export function CardProfile() {
         <div>
           <div>
             <header>
-              <h1>Marcos Roberto</h1>
+              <h2>Marcos Roberto</h2>
               <a href="#">
                 <span>GITHUB</span>
                 <FaArrowUpRightFromSquare />

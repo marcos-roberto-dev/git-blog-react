@@ -16,6 +16,12 @@ export const CardProfileContainer = styled.section`
       align-items: center;
       justify-content: space-between;
 
+      h2 {
+        font-size: 1.5rem;
+        line-height: 1.3;
+        color: ${(props) => props.theme['base-title']};
+      }
+
       a {
         display: flex;
         align-items: center;
@@ -37,11 +43,18 @@ export const CardProfileContainer = styled.section`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+
+      p {
+        display: block;
+        line-height: 1.6;
+        margin-top: 0.5rem;
+      }
     }
 
     ul {
       display: flex;
       gap: 1.5rem;
+
       a {
         display: flex;
         align-items: center;
