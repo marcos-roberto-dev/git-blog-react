@@ -1,11 +1,21 @@
+import { FaChevronLeft } from 'react-icons/fa6'
 import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
-import { ProfileCard } from '../../components/ProfileCard'
+import { ProfileCardContainer } from '../../components/ProfileCard/styles'
 
 export function PublicationContentPage() {
   return (
     <ContainerLayout>
       <LayoutAdjustment>
-        <ProfileCard />
+        <ProfileCardContainer>
+          <div>
+            <header>
+              <a href="#">
+                <FaChevronLeft />
+                <span>VOLTAR</span>
+              </a>
+            </header>
+          </div>
+        </ProfileCardContainer>
       </LayoutAdjustment>
     </ContainerLayout>
   )

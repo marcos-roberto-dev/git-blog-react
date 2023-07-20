@@ -1,3 +1,4 @@
+import { Card } from '../shared/Card'
 import { ProfileCardContainer } from './styles'
 import {
   FaUserGroup,
@@ -7,8 +8,8 @@ import {
 
 export function ProfileCard() {
   return (
-    <ProfileCardContainer>
-      <div>
+    <Card>
+      <ProfileCardContainer>
         <img
           src="https://avatars.githubusercontent.com/u/55327245?v=4"
           alt="perfil"
@@ -42,7 +43,7 @@ export function ProfileCard() {
             </ul>
           </nav>
         </div>
-      </div>
-    </ProfileCardContainer>
+      </ProfileCardContainer>
+    </Card>
   )
 }
