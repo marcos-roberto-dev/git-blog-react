@@ -37,6 +37,7 @@ export const ProfileCardContainer = styled.section`
 
     img {
       border-radius: 8px;
+      max-width: 9.25rem;
     }
 
     div {
