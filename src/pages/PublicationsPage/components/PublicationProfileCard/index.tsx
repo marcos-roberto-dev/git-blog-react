@@ -1,4 +1,4 @@
-import { Card } from '../shared/Card'
+import { Card } from '../../../../components/shared/Card'
 import { ProfileCardContainer } from './styles'
 import {
   FaUserGroup,
@@ -6,7 +6,7 @@ import {
   FaGithub,
 } from 'react-icons/fa6'
 
-export function ProfileCard() {
+export function PublicationProfileCard() {
   return (
     <Card>
       <ProfileCardContainer>

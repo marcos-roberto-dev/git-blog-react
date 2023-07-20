@@ -1,8 +1,8 @@
 import { styled } from 'styled-components'
 import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
-import { ProfileCard } from '../../components/ProfileCard'
-import { PublicationForm } from '../../components/PublicationForm'
-import { PublicationCard } from '../../components/PublicationCard'
+import { PublicationCard } from './components/PublicationCard'
+import { PublicationProfileCard } from './components/PublicationProfileCard'
+import { PublicationForm } from './components/PublicationForm'
 
 const PublicationsContainer = styled.main`
   margin-top: 3rem;
@@ -15,7 +15,7 @@ export function PublicationsPage() {
   return (
     <ContainerLayout>
       <LayoutAdjustment>
-        <ProfileCard />
+        <PublicationProfileCard />
       </LayoutAdjustment>
 
       <PublicationForm />
