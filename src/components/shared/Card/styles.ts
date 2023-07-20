@@ -10,5 +10,6 @@ export const CardContainer = styled.section`
     background: ${(props) => props.theme['base-profile']};
     display: flex;
     gap: 2rem;
+    width: 100%;
   }
 `
