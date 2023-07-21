@@ -3,6 +3,8 @@ import { styled } from 'styled-components'
 export const PublicationContentContainer = styled.main`
   padding: 2.5rem 2rem;
   line-height: 1.6;
+  width: 100%;
+  max-width: 50rem;
 
   p + * {
     margin-top: 1rem;
@@ -40,14 +42,15 @@ export const PublicationContentContainer = styled.main`
     padding-left: 1rem;
   }
 
-  img {
-    max-width: 50rem;
+  img:not(img[width], img[height]) {
+    width: 100%;
   }
 
   table {
     border-collapse: collapse;
     border: 1px solid ${(props) => props.theme['base-border']};
     border-radius: 8px;
+    max-width: 30px !important;
 
     th {
       border: 1px solid ${(props) => props.theme['base-border']};

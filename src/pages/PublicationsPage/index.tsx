@@ -9,8 +9,9 @@ import { PublicationContext } from '../../contexts/PublicationsContext'
 const PublicationsContainer = styled.main`
   margin-top: 3rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(26rem, 1fr));
   gap: 2rem;
+  width: 100%;
 `
 
 export function PublicationsPage() {

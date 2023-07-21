@@ -25,11 +25,11 @@ export function PublicationCard({
 
   const generateTextByMarkdown = useCallback(async () => {
     const rootText = document.createElement('div')
-    const response = await apiGitHubMarkdown.post('', {
-      text: content,
-    })
-    rootText.innerHTML = response.data
-    setHtmlByData((rootText.querySelector('p') as HTMLDivElement).innerText)
+    const response = await apiGitHubMarkdown(content)
+    if (response) {
+      rootText.innerHTML = response.data
+      setHtmlByData((rootText.querySelector('p') as HTMLDivElement).innerText)
+    }
   }, [content])
 
   useEffect(() => {

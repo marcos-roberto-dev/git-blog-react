@@ -1,6 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
 import { apiGitHubIssues, apiGitHubSearchIssues } from '../services/api'
-import { useParams } from 'react-router-dom'
 
 interface IAssignee {
   login: string
@@ -24,7 +23,7 @@ interface PublicationDataRequest {
 interface IPublicationContext {
   publications: PublicationDataRequest | null
   loadPublications: (query: string) => Promise<void>
-  loadPublication: (numberIssue: string) => Promise<IPublication | undefined>
+  loadPublication: (numberIssue: string) => Promise<IPublication | void>
 }
 
 export const PublicationContext = createContext({} as IPublicationContext)
@@ -41,36 +40,43 @@ export function PublicationContextProvider({
 
   async function loadPublications(query: string): Promise<void> {
     const response = await apiGitHubSearchIssues<PublicationDataRequest>(query)
-    const newPublications = response.data.items.map((publication) => ({
-      html_url: publication.html_url,
-      title: publication.title,
-      created_at: publication.created_at,
-      body: publication.body,
-      comments: publication.comments,
-      assignee: publication.assignee,
-      number: publication.number,
-    }))
+    if (response) {
+      const newPublications = response.data.items.map((publication) => ({
+        html_url: publication.html_url,
+        title: publication.title,
+        created_at: publication.created_at,
+        body: publication.body,
+        comments: publication.comments,
+        assignee: publication.assignee,
+        number: publication.number,
+      }))
 
-    setPublications((state) => ({
-      ...state,
-      items: newPublications,
-      total_count: response.data.total_count,
-    }))
+      setPublications((state) => ({
+        ...state,
+        items: newPublications,
+        total_count: response.data.total_count,
+      }))
+    }
   }
 
-  async function loadPublication(numberIssue: string): Promise<IPublication> {
-    const response = await apiGitHubIssues.get<IPublication>(`/${numberIssue}`)
-    const { assignee, body, comments, created_at, html_url, number, title } =
-      response.data
+  async function loadPublication(
+    numberIssue: string,
+  ): Promise<IPublication | void> {
+    const response = await apiGitHubIssues<IPublication>(numberIssue)
 
-    return {
-      assignee,
-      body,
-      comments,
-      created_at,
-      html_url,
-      number,
-      title,
+    if (response) {
+      const { assignee, body, comments, created_at, html_url, number, title } =
+        response.data
+
+      return {
+        assignee,
+        body,
+        comments,
+        created_at,
+        html_url,
+        number,
+        title,
+      }
     }
   }
 

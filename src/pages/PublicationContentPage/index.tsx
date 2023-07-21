@@ -1,9 +1,5 @@
-import { styled } from 'styled-components'
 import { useCallback, useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
-
-import rehypeRaw from 'rehype-raw'
 
 import {
   FaChevronLeft,
@@ -12,55 +8,18 @@ import {
   FaCalendarDay,
   FaComment,
 } from 'react-icons/fa6'
-import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
-import { Card } from '../../components/shared/Card'
+
 import {
   IPublication,
   PublicationContext,
 } from '../../contexts/PublicationsContext'
 import { LinkWithoutStyle } from '../../components/shared/LinkWithoutSyle'
-import { dateFormatter, dateFormmaterInHours } from '../../utils/formatter'
 import { PublicationMarkdown } from '../PublicationsPage/components/PublicationMarkdown'
+import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
+import { Card } from '../../components/shared/Card'
+import { CardPublicationContent } from './styles'
 
-const CardPublicationContent = styled.div`
-  width: 100%;
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    a {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      text-decoration: none;
-      color: ${(props) => props.theme.blue};
-
-      svg {
-        width: 12px;
-      }
-    }
-  }
-
-  div {
-    margin-top: 1.25rem;
-  }
-
-  ul {
-    margin-top: 0.5rem;
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-
-    li {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      color: ${(props) => props.theme['base-span']};
-    }
-  }
-`
+import { dateFormatter, dateFormmaterInHours } from '../../utils/formatter'
 
 export function PublicationContentPage() {
   const { loadPublication } = useContext(PublicationContext)

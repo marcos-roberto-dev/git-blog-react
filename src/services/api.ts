@@ -8,17 +8,39 @@ export const apiGitHubUser = axios.create({
 })
 
 export async function apiGitHubSearchIssues<T>(query: string) {
-  return await axios
-    .create({
-      baseURL: `https://api.github.com/search/issues?q=repo:${USER_NAME}/${REPO_NAME} ${query}`,
-    })
-    .get<T>('')
+  try {
+    return await axios
+      .create({
+        baseURL: `https://api.github.com/search/issues?q=repo:${USER_NAME}/${REPO_NAME} ${query}`,
+      })
+      .get<T>('')
+  } catch (e) {
+    console.log(e)
+  }
 }
 
-export const apiGitHubIssues = axios.create({
-  baseURL: `https://api.github.com/repos/${USER_NAME}/${REPO_NAME}/issues`,
-})
+export async function apiGitHubIssues<T>(numberIssue: string) {
+  try {
+    return await axios
+      .create({
+        baseURL: `https://api.github.com/repos/${USER_NAME}/${REPO_NAME}/issues/${numberIssue}`,
+      })
+      .get<T>('')
+  } catch (e) {
+    console.log(e)
+  }
+}
 
-export const apiGitHubMarkdown = axios.create({
-  baseURL: 'https://api.github.com/markdown',
-})
+export async function apiGitHubMarkdown(content: string) {
+  try {
+    return await axios
+      .create({
+        baseURL: 'https://api.github.com/markdown',
+      })
+      .post('', {
+        text: content,
+      })
+  } catch (e) {
+    console.log(e)
+  }
+}

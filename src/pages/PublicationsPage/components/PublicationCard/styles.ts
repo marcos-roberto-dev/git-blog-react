@@ -6,6 +6,7 @@ export const PublicationCardContainer = styled.article`
   border-radius: 10px;
   max-height: 206px;
   height: 100%;
+  border: 1px solid transparent;
 
   header {
     display: flex;
@@ -32,6 +33,7 @@ export const PublicationCardContainer = styled.article`
 
   &:hover {
     background: ${(props) => props.theme['base-input']};
+    border: 1px solid ${(props) => props.theme['base-border']};
     transition: background 0.2s;
   }
 `
