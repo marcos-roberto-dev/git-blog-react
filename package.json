@@ -13,11 +13,16 @@
   "dependencies": {
     "@hookform/resolvers": "^3.1.1",
     "axios": "^1.4.0",
+    "html-react-parser": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",
     "react-icons": "^4.10.1",
+    "react-markdown": "^8.0.7",
     "react-router-dom": "^6.14.2",
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-raw": "^6.1.1",
+    "remark-gfm": "^3.0.1",
     "zod": "^3.21.4"
   },
   "devDependencies": {
@@ -25,6 +30,7 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-icons": "^3.0.0",
+    "@types/react-syntax-highlighter": "^15.5.7",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",

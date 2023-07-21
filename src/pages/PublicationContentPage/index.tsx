@@ -1,3 +1,10 @@
+import { styled } from 'styled-components'
+import { useCallback, useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import ReactMarkdown from 'react-markdown'
+
+import rehypeRaw from 'rehype-raw'
+
 import {
   FaChevronLeft,
   FaArrowUpRightFromSquare,
@@ -7,7 +14,13 @@ import {
 } from 'react-icons/fa6'
 import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
 import { Card } from '../../components/shared/Card'
-import { styled } from 'styled-components'
+import {
+  IPublication,
+  PublicationContext,
+} from '../../contexts/PublicationsContext'
+import { LinkWithoutStyle } from '../../components/shared/LinkWithoutSyle'
+import { dateFormatter, dateFormmaterInHours } from '../../utils/formatter'
+import { PublicationMarkdown } from '../PublicationsPage/components/PublicationMarkdown'
 
 const CardPublicationContent = styled.div`
   width: 100%;
@@ -49,61 +62,78 @@ const CardPublicationContent = styled.div`
   }
 `
 
-const PublicationContentContainer = styled.main`
-  padding: 2.5rem 2rem;
-`
-
 export function PublicationContentPage() {
+  const { loadPublication } = useContext(PublicationContext)
+  const [publication, setPublication] = useState<IPublication>()
+  const params = useParams()
+
+  const loadPublicationContent = useCallback(async () => {
+    if (params.id) {
+      const response = await loadPublication(params.id)
+
+      if (response) {
+        setPublication(response)
+      }
+    }
+  }, [loadPublication, params.id])
+
+  useEffect(() => {
+    loadPublicationContent()
+  }, [loadPublicationContent])
+
   return (
-    <ContainerLayout>
-      <LayoutAdjustment>
-        <Card>
-          <CardPublicationContent>
-            <header>
-              <a href="#">
-                <FaChevronLeft />
-                <span>VOLTAR</span>
-              </a>
-              <a href="#">
-                <span>VER NO GITHUB</span>
-                <FaArrowUpRightFromSquare />
-              </a>
-            </header>
+    publication && (
+      <ContainerLayout>
+        <LayoutAdjustment>
+          <Card>
+            <CardPublicationContent>
+              <header>
+                <LinkWithoutStyle to="/">
+                  <FaChevronLeft />
+                  <span>VOLTAR</span>
+                </LinkWithoutStyle>
+                <a href={publication.html_url} target="_blank" rel="noreferrer">
+                  <span>VER NO GITHUB</span>
+                  <FaArrowUpRightFromSquare />
+                </a>
+              </header>
 
-            <div>
-              <h1>Javascript data types and data structures</h1>
-              <ul>
-                <li>
-                  <FaGithub />
-                  <span>marcos-roberto-dev</span>
-                </li>
-                <li>
-                  <FaCalendarDay />
-                  <span>Há 1 dia</span>
-                </li>
-                <li>
-                  <FaComment />
-                  <span>5 comentários</span>
-                </li>
-              </ul>
-            </div>
-          </CardPublicationContent>
-        </Card>
+              <div>
+                <h1>{publication.title}</h1>
+                <ul>
+                  <li>
+                    <FaGithub />
+                    <span>
+                      {publication.assignee
+                        ? publication.assignee.login
+                        : 'Anônimo'}
+                    </span>
+                  </li>
+                  <li>
+                    <FaCalendarDay />
+                    <time
+                      dateTime={dateFormatter.format(
+                        new Date(publication.created_at),
+                      )}
+                      title={dateFormatter.format(
+                        new Date(publication.created_at),
+                      )}
+                    >
+                      {dateFormmaterInHours(publication.created_at)}
+                    </time>
+                  </li>
+                  <li>
+                    <FaComment />
+                    <span>{publication.comments} comentários</span>
+                  </li>
+                </ul>
+              </div>
+            </CardPublicationContent>
+          </Card>
 
-        <PublicationContentContainer>
-          Programming languages all have built-in data structures, but these
-          often differ from one language to another. This article attempts to
-          list the built-in data structures available in JavaScript and what
-          properties they have. These can be used to build other data
-          structures. Wherever possible, comparisons with other languages are
-          drawn. Dynamic typing JavaScript is a loosely typed and dynamic
-          language. Variables in JavaScript are not directly associated with any
-          particular value type, and any variable can be assigned (and
-          re-assigned) values of all types: let foo = 42; // foo is now a number
-          foo = ‘bar’; // foo is now a string foo = true; // foo is now a
-          boolean
-        </PublicationContentContainer>
-      </LayoutAdjustment>
-    </ContainerLayout>
+          <PublicationMarkdown content={publication.body} />
+        </LayoutAdjustment>
+      </ContainerLayout>
+    )
   )
 }

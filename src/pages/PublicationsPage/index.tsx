@@ -3,6 +3,8 @@ import { ContainerLayout, LayoutAdjustment } from '../../styles/LayoutAdjusment'
 import { PublicationCard } from './components/PublicationCard'
 import { PublicationProfileCard } from './components/PublicationProfileCard'
 import { PublicationForm } from './components/PublicationForm'
+import { useContext } from 'react'
+import { PublicationContext } from '../../contexts/PublicationsContext'
 
 const PublicationsContainer = styled.main`
   margin-top: 3rem;
@@ -12,6 +14,7 @@ const PublicationsContainer = styled.main`
 `
 
 export function PublicationsPage() {
+  const { publications } = useContext(PublicationContext)
   return (
     <ContainerLayout>
       <LayoutAdjustment>
@@ -19,14 +22,19 @@ export function PublicationsPage() {
       </LayoutAdjustment>
 
       <PublicationForm />
-      <PublicationsContainer>
-        <PublicationCard />
-        <PublicationCard />
-        <PublicationCard />
-        <PublicationCard />
-        <PublicationCard />
-        <PublicationCard />
-      </PublicationsContainer>
+      {publications && (
+        <PublicationsContainer>
+          {publications.items.map((publication) => (
+            <PublicationCard
+              key={publication.number}
+              content={publication.body}
+              date={publication.created_at}
+              title={publication.title}
+              numberIssue={publication.number}
+            />
+          ))}
+        </PublicationsContainer>
+      )}
     </ContainerLayout>
   )
 }
